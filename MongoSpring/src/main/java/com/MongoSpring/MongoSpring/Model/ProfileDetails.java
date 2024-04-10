@@ -8,7 +8,7 @@ public class ProfileDetails {
     private String photosrc;
 
     private long mobile;
-
+    private String email;
     public long getMobile() {
         return mobile;
     }
@@ -32,5 +32,13 @@ public class ProfileDetails {
 
     public void setPhotosrc(String photosrc) {
         this.photosrc = photosrc;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
