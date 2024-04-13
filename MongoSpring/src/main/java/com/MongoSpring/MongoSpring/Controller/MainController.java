@@ -1,4 +1,5 @@
 package com.MongoSpring.MongoSpring.Controller;
+import com.MongoSpring.MongoSpring.Model.AdminDetails;
 import com.MongoSpring.MongoSpring.Model.ProfileDetails;
 import com.MongoSpring.MongoSpring.Model.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins ={"http://localhost:8081","http://localhost:3000"})
 @RequestMapping("/api")
 public class MainController {
 
@@ -27,6 +28,11 @@ public class MainController {
         Service.postProfileDetails(profileDetails);
         return "POSTED ProfileDetails SUCCESSFULLY";
     }
+    @PostMapping("/create/admin")
+    public String postAdminDetails(@RequestBody AdminDetails adminDetails){
+        Service.postAdminDetails(adminDetails);
+        return "POSTED AdminDetails SUCCESSFULLY";
+    }
     @GetMapping("/profile/mobile/{number}")
     public ProfileDetails getProfileDetails(@PathVariable long number){return Service.getProfileDetails(number);}
     @GetMapping("/registration/{username}")
@@ -37,5 +43,7 @@ public class MainController {
     public UserDetails getUserDetailsbyid(@PathVariable String id){
         return Service.getUserDetailsbyid(id);
 }
+    @GetMapping("/admin/verify/{username}")
+    public AdminDetails getAdminDetails(@PathVariable String username){return Service.getAdminDetails(username);}
 
 }
