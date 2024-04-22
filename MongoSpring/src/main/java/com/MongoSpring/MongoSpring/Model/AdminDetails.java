@@ -6,13 +6,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "admin")
 public class AdminDetails {
     private String username;
-    private long password;
+    private String password;
+    private long mobile;
 
-    public long getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(long password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -22,5 +23,13 @@ public class AdminDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public long getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(long mobile) {
+        this.mobile = mobile;
     }
 }
