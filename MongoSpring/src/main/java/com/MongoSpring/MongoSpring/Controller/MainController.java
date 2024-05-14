@@ -1,50 +1,92 @@
 package com.MongoSpring.MongoSpring.Controller;
+
 import com.MongoSpring.MongoSpring.Model.AdminDetails;
 import com.MongoSpring.MongoSpring.Model.ProfileDetails;
 import com.MongoSpring.MongoSpring.Model.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.MongoSpring.MongoSpring.Repository.AdminRepo;
+// import com.MongoSpring.MongoSpring.Service.ChatService;
 import com.MongoSpring.MongoSpring.Service.HandleCall;
 import org.springframework.web.bind.annotation.*;
-
+// import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
 
 @RestController
-@CrossOrigin(origins ={"http://localhost:8081","http://localhost:3000"})
+@CrossOrigin(origins = { "http://localhost:8081", "http://localhost:3000" })
 @RequestMapping("/api")
 public class MainController {
+    // private ChatService textGenerationService;
+    //
+    // public void ChatbotController(ChatService textGenerationService) {
+    // this.textGenerationService = textGenerationService;
+    // }
 
     private final HandleCall Service;
+    @Autowired
+    private AdminRepo adminRepo;
 
-    public MainController( com.MongoSpring.MongoSpring.Service.HandleCall Service) {
+    public MainController(com.MongoSpring.MongoSpring.Service.HandleCall Service) {
+        // this.textGenerationService = textGenerationService ChatService
+        // textGenerationService;
         this.Service = Service;
     }
 
     @PostMapping("/registration")
-    public String postUserDetails(@RequestBody UserDetails userDetails){
+    public String postUserDetails(@RequestBody UserDetails userDetails) {
         Service.postUserDetails(userDetails);
         return "POSTED UserDetails SUCCESSFULLY";
     }
+
     @PostMapping("/user/profile")
-    public String postProfileDetails(@RequestBody ProfileDetails profileDetails){
+    public String postProfileDetails(@RequestBody ProfileDetails profileDetails) {
         Service.postProfileDetails(profileDetails);
         return "POSTED ProfileDetails SUCCESSFULLY";
     }
+
     @PostMapping("/create/admin")
-    public String postAdminDetails(@RequestBody AdminDetails adminDetails){
+    public String postAdminDetails(@RequestBody AdminDetails adminDetails) {
         Service.postAdminDetails(adminDetails);
         return "POSTED AdminDetails SUCCESSFULLY";
     }
+
     @GetMapping("/profile/mobile/{number}")
-    public ProfileDetails getProfileDetails(@PathVariable long number){return Service.getProfileDetails(number);}
+    public ProfileDetails getProfileDetails(@PathVariable long number) {
+        return Service.getProfileDetails(number);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody AdminDetails adminDetails) {
+        String username = adminDetails.getUsername();
+        String password = adminDetails.getPassword();
+
+        AdminDetails admin = adminRepo.findByusername(username);
+
+        if (admin == null) {
+            return "User not found";
+        }
+
+        if (!admin.getPassword().equals(password)) {
+            return "Incorrect password";
+        }
+
+        return "Login successful";
+    }
+
     @GetMapping("/registration/{username}")
-    public UserDetails getUserDetails(@PathVariable  String username){
+    public UserDetails getUserDetails(@PathVariable String username) {
         return Service.getUserDetails(username);
     }
+
     @GetMapping("/registration/id/{id}")
-    public UserDetails getUserDetailsbyid(@PathVariable String id){
+    public UserDetails getUserDetailsbyid(@PathVariable String id) {
         return Service.getUserDetailsbyid(id);
-}
+    }
+
     @GetMapping("/admin/verify/{username}")
-    public AdminDetails getAdminDetails(@PathVariable String username){return Service.getAdminDetails(username);}
+    public AdminDetails getAdminDetails(@PathVariable String username) {
+        return Service.getAdminDetails(username);
+    }
+
     @PostMapping("/chat")
     public String handleChatMessage(@RequestBody String message) {
         if (message.trim().equalsIgnoreCase("hi")) {
@@ -61,6 +103,10 @@ public class MainController {
             return "I'm sorry, I don't understand. \nPlease choose one of the options:\n1. Customer Care\n2. New Features\n3. Technical Support\n4. Account Management";
         }
     }
-
+    // @PostMapping("/message")
+    // public ResponseEntity<String> getResponse(@RequestBody String message) {
+    // String response = textGenerationService.generateResponse(message);
+    // return new ResponseEntity<>(response, HttpStatus.OK);
+    // }
 
 }
