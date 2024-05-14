@@ -55,21 +55,24 @@ public class MainController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody AdminDetails adminDetails) {
+    public AdminDetails login(@RequestBody AdminDetails adminDetails) {
         String username = adminDetails.getUsername();
         String password = adminDetails.getPassword();
+        // long mobile = admin.getMobile()
+
 
         AdminDetails admin = adminRepo.findByusername(username);
 
         if (admin == null) {
-            return "User not found";
+            return new AdminDetails("User not found", 0);
         }
 
         if (!admin.getPassword().equals(password)) {
-            return "Incorrect password";
+            return new AdminDetails("Incorrect password",0);
         }
 
-        return "Login successful";
+        // return "Login Successful. Mobile number: " + admin.getMobile();
+        return new AdminDetails("Login Successful", admin.getMobile());
     }
 
     @GetMapping("/registration/{username}")
