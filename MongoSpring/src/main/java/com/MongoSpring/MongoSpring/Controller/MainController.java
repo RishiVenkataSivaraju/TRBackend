@@ -1,6 +1,7 @@
 package com.MongoSpring.MongoSpring.Controller;
 
 import com.MongoSpring.MongoSpring.Model.AdminDetails;
+import com.MongoSpring.MongoSpring.Model.McqCredentails;
 import com.MongoSpring.MongoSpring.Model.ProfileDetails;
 import com.MongoSpring.MongoSpring.Model.UserDetails;
 import com.MongoSpring.MongoSpring.Repository.AdminRepo;
@@ -43,6 +44,12 @@ public class MainController {
         return "POSTED ProfileDetails SUCCESSFULLY";
     }
 
+    @PostMapping("/admin/mcq")
+    public String postMCQcredentials(@RequestBody McqCredentails McqCredentails) {
+        Service.postMCQcredentials(McqCredentails);
+        return "posted";
+    }
+
     @PostMapping("/create/admin")
     public String postAdminDetails(@RequestBody AdminDetails adminDetails) {
         Service.postAdminDetails(adminDetails);
@@ -60,7 +67,6 @@ public class MainController {
         String password = adminDetails.getPassword();
         // long mobile = admin.getMobile()
 
-
         AdminDetails admin = adminRepo.findByusername(username);
 
         if (admin == null) {
@@ -68,7 +74,7 @@ public class MainController {
         }
 
         if (!admin.getPassword().equals(password)) {
-            return new AdminDetails("Incorrect password",0);
+            return new AdminDetails("Incorrect password", 0);
         }
 
         // return "Login Successful. Mobile number: " + admin.getMobile();
