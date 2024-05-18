@@ -1,5 +1,7 @@
 package com.MongoSpring.MongoSpring.Model;
 
+import java.lang.reflect.Array;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "MCQ")
@@ -7,6 +9,7 @@ public class McqCredentails {
     private String subject;
     private String question;
     private int option;
+    private Array choices;
     private String one;
     private String two;
     private String three;
@@ -46,7 +49,6 @@ public class McqCredentails {
         this.four = four;
     }
 
-
     public String getSubject() {
         return subject;
     }
@@ -71,13 +73,7 @@ public class McqCredentails {
         this.option = option;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+ 
 
     public String getExplanation() {
         return Explanation;
@@ -87,4 +83,19 @@ public class McqCredentails {
         Explanation = explanation;
     }
 
+    public Array getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Array choices) {
+        this.choices = choices;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

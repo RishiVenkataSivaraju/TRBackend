@@ -59,7 +59,12 @@ public class HandleCall {
         return reqAdmin;
     }
 
+    public McqCredentails getMcqCredentails(String question) {
+        McqCredentails reqquestion = repository3.findByquestion(question);
+        return reqquestion;
+    }
+
     public void postMCQcredentials(McqCredentails mcqCredentails) {
-       repository3.insert(mcqCredentails);
+        repository3.insert(mcqCredentails);
     }
 }

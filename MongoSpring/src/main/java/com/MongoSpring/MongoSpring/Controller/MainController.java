@@ -5,15 +5,18 @@ import com.MongoSpring.MongoSpring.Model.McqCredentails;
 import com.MongoSpring.MongoSpring.Model.ProfileDetails;
 import com.MongoSpring.MongoSpring.Model.UserDetails;
 import com.MongoSpring.MongoSpring.Repository.AdminRepo;
+import com.MongoSpring.MongoSpring.Repository.MCQRepo;
 // import com.MongoSpring.MongoSpring.Service.ChatService;
 import com.MongoSpring.MongoSpring.Service.HandleCall;
 import org.springframework.web.bind.annotation.*;
 // import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:8081", "http://localhost:3000" })
+@CrossOrigin(origins = { "http://localhost:8081", "http://localhost:3000", "http://localhost:5173" })
 @RequestMapping("/api")
 public class MainController {
     // private ChatService textGenerationService;
@@ -59,6 +62,13 @@ public class MainController {
     @GetMapping("/profile/mobile/{number}")
     public ProfileDetails getProfileDetails(@PathVariable long number) {
         return Service.getProfileDetails(number);
+    }
+
+    @PostMapping("/check")
+    public McqCredentails check(@RequestBody McqCredentails answer) {
+        String question = answer.getQuestion();
+        McqCredentails mcq = Service.getMcqCredentails(question);
+        return mcq;
     }
 
     @PostMapping("/login")
