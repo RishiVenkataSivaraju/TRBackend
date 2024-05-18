@@ -8,45 +8,43 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class McqCredentails {
     private String subject;
     private String question;
-    private int option;
-    private Array choices;
-    private String one;
-    private String two;
-    private String three;
-    private String four;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
     private String answer;
     private String Explanation;
 
-    public String getOne() {
-        return one;
+    public String getOption1() {
+        return option1;
     }
 
-    public void setOne(String one) {
-        this.one = one;
+    public void setOption1(String option1) {
+        this.option1 = option1;
     }
 
-    public String getTwo() {
-        return two;
+    public String getOption2() {
+        return option2;
     }
 
-    public void setTwo(String two) {
-        this.two = two;
+    public void setOption2(String option2) {
+        this.option2 = option2;
     }
 
-    public String getThree() {
-        return three;
+    public String getOption3() {
+        return option3;
     }
 
-    public void setThree(String three) {
-        this.three = three;
+    public void setOption3(String option3) {
+        this.option3 = option3;
     }
 
-    public String getFour() {
-        return four;
+    public String getOption4() {
+        return option4;
     }
 
-    public void setFour(String four) {
-        this.four = four;
+    public void setOption4(String option4) {
+        this.option4 = option4;
     }
 
     public String getSubject() {
@@ -65,16 +63,6 @@ public class McqCredentails {
         this.question = question;
     }
 
-    public int getOption() {
-        return option;
-    }
-
-    public void setOption(int option) {
-        this.option = option;
-    }
-
- 
-
     public String getExplanation() {
         return Explanation;
     }
@@ -83,13 +71,13 @@ public class McqCredentails {
         Explanation = explanation;
     }
 
-    public Array getChoices() {
-        return choices;
-    }
+    // public Array getOptions() {
+    // return options;
+    // }
 
-    public void setChoices(Array choices) {
-        this.choices = choices;
-    }
+    // public void setOptions(Array options) {
+    // this.options = options;
+    // }
 
     public String getAnswer() {
         return answer;
