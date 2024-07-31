@@ -3,7 +3,6 @@ import com.MongoSpring.MongoSpring.Model.AdminDetails;
 import com.MongoSpring.MongoSpring.Model.McqCredentails;
 import com.MongoSpring.MongoSpring.Model.ProfileDetails;
 import com.MongoSpring.MongoSpring.Model.UserDetails;
-import com.MongoSpring.MongoSpring.Repository.AdminRepo;
 import com.MongoSpring.MongoSpring.Repository.MCQRepo;
 import com.MongoSpring.MongoSpring.Service.HandleCall;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:8081", "http://localhost:3000", "http://localhost:5173" })
+@CrossOrigin(origins = {"http://localhost:8081/", "http://localhost:5173/", "http://192.168.0.123:8080/", "http://192.168.0.123:8081/","http://192.168.0.123:8082"})
+
 @RequestMapping("/api")
 public class MainController {
 
@@ -23,6 +23,7 @@ public class MainController {
     public MainController(HandleCall service, MCQRepo mcqRepo) {
         this.service = service;
         this.mcqRepo = mcqRepo;
+
     }
 
     @PostMapping("/registration")
@@ -97,4 +98,5 @@ public class MainController {
         // Your chat message handling logic here
         return "Handled message: " + message;
     }
+
 }
