@@ -24,6 +24,7 @@ public class MainController {
         service.postUserDetails(userDetails);
         return "POSTED UserDetails SUCCESSFULLY";
     }
+
     @GetMapping("/mcq/questions")
     public List<McqCredentails> getQuestionsBySubject(@RequestParam String subject) {
         return mcqRepo.findAllBySubject(subject);
