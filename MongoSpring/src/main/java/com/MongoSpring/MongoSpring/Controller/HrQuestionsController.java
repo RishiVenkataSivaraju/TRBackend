@@ -1,8 +1,3 @@
-// package com.MongoSpring.MongoSpring.Controller;
-
-// public class Hrcontroller {
-
-// }
 package com.MongoSpring.MongoSpring.Controller;
 
 import com.MongoSpring.MongoSpring.Model.HrQuestions;
@@ -17,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/hrQuestions")
-@CrossOrigin(origins = {"http://localhost:5173","http://localhost:3000"}) // Add this line
+@CrossOrigin(origins = "*")  // Allowing all origins
 public class HrQuestionsController {
     private final HrService HrService;
 
@@ -34,7 +29,7 @@ public class HrQuestionsController {
 
     @GetMapping("/getHrQuestions")
     public ResponseEntity<List<HrQuestions>> getHrQuestions() {
-        List<HrQuestions>   Questions = HrService.getAllQuestions();
+        List<HrQuestions> Questions = HrService.getAllQuestions();
         return new ResponseEntity<>(Questions, HttpStatus.OK);
     }
 }

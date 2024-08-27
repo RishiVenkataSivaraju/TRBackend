@@ -1,4 +1,5 @@
 package com.MongoSpring.MongoSpring.Controller;
+
 import com.MongoSpring.MongoSpring.Model.AdminDetails;
 import com.MongoSpring.MongoSpring.Model.McqCredentails;
 import com.MongoSpring.MongoSpring.Model.ProfileDetails;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:8081", "http://localhost:3000", "http://localhost:5173" })
+@CrossOrigin(origins = "*")  // Allowing all origins
 @RequestMapping("/api")
 public class MainController {
 
@@ -98,3 +99,4 @@ public class MainController {
         return "Handled message: " + message;
     }
 }
+
